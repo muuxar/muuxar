@@ -1,137 +1,79 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>幸运大抽奖</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
+<style>
+.container {
+  width: 1080px;
+  height: 1920px;
+  background: #0a1129;
+  padding: 40px;
+  font-family: 'Microsoft YaHei';
+}
 
-        .container {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 500px;
-            margin-top: 30px;
-        }
+.card {
+  background: rgba(255,255,255,0.9);
+  border-radius: 30px;
+  padding: 40px;
+  margin-bottom: 30px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+}
 
-        #roulette {
-            height: 200px;
-            background: #fff;
-            border-radius: 10px;
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2em;
-            color: #ff6b6b;
-            position: relative;
-            overflow: hidden;
-            border: 3px solid #ff4757;
-        }
+.icon {
+  font-size: 80px;
+  margin-right: 20px;
+}
 
-        .slot {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform: translateY(-100%);
-            animation: slotScroll 0.1s infinite linear;
-        }
+.title {
+  color: #2a5c8b;
+  font-size: 72px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
 
-        @keyframes slotScroll {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(100%); }
-        }
+.fact-box {
+  background: #e3f2fd;
+  padding: 25px;
+  border-left: 8px solid #2196F3;
+  margin: 20px 0;
+}
 
-        button {
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin: 10px;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-
-        #result {
-            text-align: center;
-            font-size: 1.5em;
-            margin: 20px 0;
-            min-height: 40px;
-        }
-    </style>
+.highlight {
+  color: #d32f2f;
+  font-weight: bold;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎉 幸运大抽奖 🎉</h1>
-        <div id="roulette">
-            <div class="slot">准备就绪！</div>
-        </div>
-        <div id="result"></div>
-        <div style="text-align: center;">
-            <button id="startBtn">开始抽奖</button>
-            <button id="stopBtn" disabled>停止</button>
-        </div>
+<div class="container">
+  
+  <div class="card">
+    <div class="title">🐙 章鱼冷知识 | 95%的人不知道</div>
+    
+    <div class="fact-box">
+      <span class="icon">💙</span>
+      <h2 style="font-size:58px;margin:0">3颗心脏的奥秘</h2>
+      <p style="font-size:42px;line-height:1.5">
+        ❶ 主心脏：驱动全身血液循环<br>
+        ❷ 鳃心脏×2：专为腮部供血<br>
+        🚫 游泳时主心脏会停止跳动！
+      </p>
     </div>
 
-    <script>
-        const participants = [
-            '张三', '李四', '王五', '赵六',
-            '陈七', '周八', '吴九', '郑十'
-        ];
+    <div class="fact-box" style="background:#f0f4c3;border-color:#cddc39">
+      <span class="icon">🎨</span>
+      <h2 style="font-size:58px;margin:0">神奇变色术</h2>
+      <p style="font-size:42px;line-height:1.5">
+        ▸ 全身3亿个色素细胞<br>
+        ▸ <span class="highlight">0.3秒</span>完成全身变色<br>
+        ▸ 用皮肤"看到"光线
+      </p>
+    </div>
 
-        let isSpinning = false;
-        let spinInterval;
-        let currentIndex = 0;
-        const roulette = document.getElementById('roulette');
-        const resultDiv = document.getElementById('result');
-        
-        document.getElementById('startBtn').addEventListener('click', () => {
-            if (!isSpinning) {
-                isSpinning = true;
-                document.getElementById('startBtn').disabled = true;
-                document.getElementById('stopBtn').disabled = false;
-                resultDiv.textContent = '';
-                
-                spinInterval = setInterval(() => {
-                    roulette.children[0].textContent = 
-                        participants[Math.floor(Math.random() * participants.length)];
-                }, 50);
-            }
-        });
+    <div style="text-align:center;margin-top:50px">
+      <span style="font-size:48px;color:#666">🔍关注我，每天get一个奇怪知识！</span>
+    </div>
+  </div>
 
-        document.getElementById('stopBtn').addEventListener('click', () => {
-            if (isSpinning) {
-                clearInterval(spinInterval);
-                isSpinning = false;
-                document.getElementById('startBtn').disabled = false;
-                document.getElementById('stopBtn').disabled = true;
-                
-                const winner = participants[Math.floor(Math.random() * participants.length)];
-                resultDiv.textContent = `🎉 中奖者：${winner} 🎉`;
-                roulette.children[0].textContent = winner;
-            }
-        });
-    </script>
+</div>
 </body>
 </html>
